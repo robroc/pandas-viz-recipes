@@ -1,14 +1,18 @@
 import matplotlib as mpl
+import matplotlib.pyplot as plt
 from matplotlib.patches import Polygon
 from matplotlib.collections import PatchCollection
 from mpl_toolkits.basemap import Basemap
 from pysal.esda.mapclassify import Natural_Breaks as nb
 
 
-def make_choro(shapefile, dataframe, val_col, index_col, num_breaks = 6, color_ramp = 'Greens' title = '', save = False):
+def make_choro(shapefile, dataframe, val_col, index_col, num_breaks = 6, color_ramp = 'Greens' title = '', main_poly = None, save = False):
     """
-    Makes a choropelth map of a given shapefile and a numerical column of a dataframe. Shapefile and          dataframe must both have a matching index_column for joining. Uses Jenks natural breaks for 
+    Makes a choropelth map of a given shapefile and a numerical column of a dataframe. Shapefile and
+    dataframe must both have a matching index_column for joining. Uses Jenks natural breaks for 
     classifying.
+    
+    Based on this tutorial: http://ramiro.org/notebook/basemap-choropleth/
     """
 
 	num_colors = num_breaks
@@ -35,8 +39,8 @@ def make_choro(shapefile, dataframe, val_col, index_col, num_breaks = 6, color_r
         if idx not in frame.index:
             color = '#dddddd'
     '''
-    Optional for coloring a country differently        
-        elif idx == country:
+    Optional for coloring a single polygon differently        
+        elif idx == main_poly:
             color = '#E6A3B1'
     '''
         else:
@@ -47,7 +51,7 @@ def make_choro(shapefile, dataframe, val_col, index_col, num_breaks = 6, color_r
         pc.set_facecolor(color)
         ax.add_collection(pc)
 
-    # Cover up Antarctica so legend can be placed over it.
+    # Cover up bottom (Antarctica if world map) so legend can be placed over it.
     ax.axhspan(0, 1000 * 1800, facecolor='w', edgecolor='w', zorder=2)
 
     # Draw color legend.

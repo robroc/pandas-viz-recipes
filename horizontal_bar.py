@@ -3,7 +3,7 @@ import matplotlib.pypolt as plt
 
 plt.style.use('ggplot')
 
-def bar_h(dataframe, col, n = 12, title = None, xlabel='', save = False):
+def bar_h(dataframe, col, n = 12, title = '', xlabel='', save = False):
     '''
     Function to draw a simple horizontal bar chart. Col can be one column of list of columns.
     Bar labels will be the dataframe index.
