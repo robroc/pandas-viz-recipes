@@ -6,7 +6,7 @@ from itertools import chain
 '''
 
 Recipe to plot x, y points over a shapefile. It requires two things from the user:
-A path to a shapefile, and lists of latitude and longiture points.
+A path to a shapefile, and lists of latitude and longitude points.
 
 If using pandas Series, convert to list first. 
 
